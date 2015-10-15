@@ -14,7 +14,7 @@ SGE needs two files to work, the config.json file that includes all SGE configur
     config file has all the configurations of SGE, here you can disable the console debugger or add modules or packages to load.
 
 - #application.js
-    this file can be named as you want to, the path has to be specified in the html <script> tag using the attribute "app".
+    this file can be named as you want to, the path has to be specified in the html `<script>` tag using the attribute "app".
     This file has the core of the application, the has to be two functions:
 
     - Init
