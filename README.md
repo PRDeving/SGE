@@ -17,11 +17,11 @@ SGE needs two files to work, the config.json file that includes all SGE configur
     this file can be named as you want to, the path has to be specified in the html <script> tag using the attribute "app".
     This file has the core of the application, the has to be two functions:
 
-    - Init()
+    - Init
         it has modules definitions and configurations.
         if you want to use custom modules or configure scenes or default modules, this is your function.
 
-    - Main()
+    - Main
         it has the core code.
         application code is write here, you can use it or not, remember, you can load your custom modules, controllers, etc.
 
