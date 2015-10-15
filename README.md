@@ -76,9 +76,9 @@ SGE has some prebuilt modules that you can activate in the config.json
     it allows you to manage scenes, you can define them and fire them at your will.
 
     SGE.Scene has two functions:
-    - ##SGE.Scene.Add(string name, function callback)
+    - SGE.Scene.Add(string name, function callback)
         Defines your scene.
-    - ##SGE.Scene.Load(string name, object arguments = null)
+    - SGE.Scene.Load(string name, object arguments = null)
         Fires your scene, you can pass args if you want to, they have to be catched in the catcher's scene definition
         ```
             //Defines scene that catches args
@@ -95,15 +95,15 @@ SGE has some prebuilt modules that you can activate in the config.json
 
     SGE.GameLoop has four functions:
 
-    - ##SGE.GameLoop.Suscribe(function fn, boolean priorize = false)
+    - SGE.GameLoop.Suscribe(function fn, boolean priorize = false)
         you can suscribe any function and it'll be fired in every loop.
         Priorized suscriptions will be fired first, so you can control inputs or logic before draw (ex).
-    - ##SGE.GameLoop.Run(int fps)
+    - SGE.GameLoop.Run(int fps)
         This start's the loop at the fps required.
         This will clear the canvas (var ctx) if it has been defined (sounds dumb, gonna change it soon)
-    - ##SGE.GameLoop.Stop()
+    - SGE.GameLoop.Stop()
         Stops the loop, you can rerun it calling SGE.GameLoop.Run() again.
-    - ##SGE.GameLoop.Clear()
+    - SGE.GameLoop.Clear()
         Stops the loop and clears all the suscribed functions
 
 - mousemanager
@@ -112,7 +112,7 @@ SGE has some prebuilt modules that you can activate in the config.json
 
     mousemanager checks the cursor position on live, it has one function to use:
 
-    - ##SGE.Mouse.Position()
+    - SGE.Mouse.Position()
         returns an object with the mouse position
         ```
         {
