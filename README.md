@@ -72,7 +72,7 @@ SGE modules are stored in SGE/modules/. All modules has the same structure that 
 
 SGE has some prebuilt modules that you can activate in the config.json
 
-- scenemanager
+- ###scenemanager
     it allows you to manage scenes, you can define them and fire them at your will.
 
     SGE.Scene has two functions:
@@ -90,7 +90,7 @@ SGE has some prebuilt modules that you can activate in the config.json
             SGE.Scene.Load("getter",["Pablo"]);
         ```
 
-- gameloop
+- ###gameloop
     The easiest kind of loop ever. just define the actions and subscribe them to the loop.
 
     SGE.GameLoop has four functions:
@@ -106,7 +106,7 @@ SGE has some prebuilt modules that you can activate in the config.json
     - SGE.GameLoop.Clear()
         Stops the loop and clears all the suscribed functions
 
-- mousemanager
+- ###mousemanager
     It's not very usefull but i like it :)
     i dont think i will work more in this module, aint necessary.
 
@@ -122,6 +122,6 @@ SGE has some prebuilt modules that you can activate in the config.json
         ```
         Yo can get positions using SGE.Mouse.Position().X or SGE.Mouse.Position().Y
 
-- fullscreen
+- ###fullscreen
     It fires the full screen and calls the callback if theres any, it needs user interaction.
     SGE.FullScreen(funcion callback = null)
