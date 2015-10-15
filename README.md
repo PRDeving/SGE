@@ -16,7 +16,7 @@ SGE needs two files to work, the config.json file that includes all SGE configur
 `{"Debug":true, "modules":["scenemanager"]}`
 
 - application.js
-´
+´´´
 function Init(){
     //this function fires on the first load, here should be all modules configuration.
     SGE.Loader.Add("assets/mycustommodule.js");
@@ -25,4 +25,4 @@ function Main(){
     //this function is trigged when all modules are loaded
     console.log("it works");
 }
-´
+´´´
