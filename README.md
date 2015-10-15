@@ -77,4 +77,51 @@ SGE has some prebuilt modules that you can activate in the config.json
 
     SGE.Scene has two functions:
     - ##SGE.Scene.Add(string name, function callback)
+        Defines your scene.
     - ##SGE.Scene.Load(string name, object arguments = null)
+        Fires your scene, you can pass args if you want to, they have to be catched in the catcher's scene definition
+        ```
+            //Defines scene that catches args
+            SGE.Scene.Add("getter", function(args){
+                console.log("my name is ",args[0]);
+            });
+
+            //Fires the scene
+            SGE.Scene.Load("getter",["Pablo"]);
+        ```
+
+- gameloop
+    The easiest kind of loop ever. just define the actions and subscribe them to the loop.
+
+    SGE.GameLoop has four functions:
+
+    - ##SGE.GameLoop.Suscribe(function fn, boolean priorize = false)
+        you can suscribe any function and it'll be fired in every loop.
+        Priorized suscriptions will be fired first, so you can control inputs or logic before draw (ex).
+    - ##SGE.GameLoop.Run(int fps)
+        This start's the loop at the fps required.
+        This will clear the canvas (var ctx) if it has been defined (sounds dumb, gonna change it soon)
+    - ##SGE.GameLoop.Stop()
+        Stops the loop, you can rerun it calling SGE.GameLoop.Run() again.
+    - ##SGE.GameLoop.Clear()
+        Stops the loop and clears all the suscribed functions
+
+- mousemanager
+    It's not very usefull but i like it :)
+    i dont think i will work more in this module, aint necessary.
+
+    mousemanager checks the cursor position on live, it has one function to use:
+
+    - ##SGE.Mouse.Position()
+        returns an object with the mouse position
+        ```
+        {
+            X: int mouse X,
+            Y: int mouse Y
+        }
+        ```
+        Yo can get positions using SGE.Mouse.Position().X or SGE.Mouse.Position().Y
+
+- fullscreen
+    It fires the full screen and calls the callback if theres any, it needs user interaction.
+    SGE.FullScreen(funcion callback = null)
