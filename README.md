@@ -66,3 +66,15 @@ function Main(){
 <body>
 </body>
 ```
+
+#MODULES
+SGE modules are stored in SGE/modules/. All modules has the same structure that allows SGE to load them in a memory efficent way (i guess)
+
+SGE has some prebuilt modules that you can activate in the config.json
+
+- scenemanager
+    it allows you to manage scenes, you can define them and fire them at your will.
+
+    SGE.Scene has two functions:
+        - #`SGE.Scene.Add(string name, function callback)`
+        - #`SGE.Scene.Load(string name, object arguments = null)`
