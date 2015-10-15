@@ -42,10 +42,19 @@ SGE needs two files to work, the config.json file that includes all SGE configur
 function Init(){
     //this function fires on the first load, here should be all modules configuration.
     console.log("Initializing");
+
+    //We are using the scenemanager module, so lets define a scene called "hello_world"
+    SGE.Scene.Add("hello_world", function(){
+        $("body").html("Hello world!");
+        console.log("Hello world!")
+    });
 }
 function Main(){
     //this function is trigged when all modules are loaded
     console.log("it works");
+
+    //Now lets fire the "hello_world" scene
+    SGE.Scene.Load("hello_world");
 }
 ```
 
