@@ -72,6 +72,11 @@ SGE modules are stored in SGE/modules/. All modules has the same structure that 
 
 SGE has some prebuilt modules that you can activate in the config.json
 
+- ###loader (inbuilt)
+    it allows you to load your own modules.
+
+    SGE.Loader.Add(string pathOfYourModule);
+
 - ###scenemanager
     it allows you to manage scenes, you can define them and fire them at your will.
 
@@ -125,3 +130,34 @@ SGE has some prebuilt modules that you can activate in the config.json
 - ###fullscreen
     It fires the full screen and calls the callback if theres any, it needs user interaction.
     SGE.FullScreen(funcion callback = null)
+
+
+#Another piece of code
+Gonna use a custom module, the scenes module and the gameloop module
+
+- customjs.js
+```
+    function printhello(n){
+        console.log("hello ", n);
+    }
+```
+- application.js
+```
+function Init(){
+    //We load our custom printhello function
+    SGE.Loader.Add("/mymodules/customjs.js");
+
+    //And creates the main scene
+    SGE.Scenes.Add("inloop",function(){
+        var n = 0;
+        SGE.GameLoop.Suscribe(printhello(n));
+        SGE.GameLoop.Suscribe(function(){n++}, true);
+        SGE.GameLoop.Run();
+    });
+}
+
+function Main(){
+    SGE.Scene.Load("inloop");
+}
+
+```
