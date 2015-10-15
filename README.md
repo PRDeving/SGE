@@ -13,7 +13,14 @@ SGE needs two files to work, the config.json file that includes all SGE configur
 # SAMPLE CODE
 
 - config.json
-`{"Debug":true, "modules":["scenemanager"]}`
+```
+{
+    "Debug":true,
+    "modules":[
+        "scenemanager"
+    ]
+}
+```
 
 - application.js
 ```
