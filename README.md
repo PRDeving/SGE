@@ -254,3 +254,5 @@ function Main(){
 - 16 Dec 2015:
 
     canvasmanager, structures and doublebuffer modules added, added destructor on scenemanager.
+
+    Changed the way to define modules, fixed the residual trash that it was lefting arround.
