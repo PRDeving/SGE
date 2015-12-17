@@ -81,9 +81,11 @@ SGE has some prebuilt modules that you can activate in the config.json
     it allows you to manage scenes, you can define them and fire them at your will.
 
     SGE.Scene has two functions:
-    - SGE.Scene.Add(string name, function callback)
+    - SGE.Scene.Add(string name, function callback, function destructor)
+
         Defines your scene.
     - SGE.Scene.Load(string name, object arguments = null)
+        
         Fires your scene, you can pass args if you want to, they have to be catched in the catcher's scene definition
         ```
             //Defines scene that catches args
@@ -94,6 +96,9 @@ SGE has some prebuilt modules that you can activate in the config.json
             //Fires the scene
             SGE.Scene.Load("getter",["Pablo"]);
         ```
+    ####16 Dec 2015 Update:
+
+    - Now you can define a destructor for each scene that will be called before changing scene
 
 - ###gameloop
     The easiest kind of loop ever. just define the actions and subscribe them to the loop.
@@ -127,9 +132,90 @@ SGE has some prebuilt modules that you can activate in the config.json
         ```
         Yo can get positions using SGE.Mouse.Position().X or SGE.Mouse.Position().Y
 
+- ###debugger
+    Displays a logger div where you can add debug info in real time.
+
+    The name of the logged info has to be suitable to be an DOMElement Id (no commas, spaces, etc);
+
+    ```javascript
+    SGE.Debugger.Log({
+        "PositionX": pos.x,
+        "PositionY": pos.y
+    });
+    ```
+
 - ###fullscreen
     It fires the full screen and calls the callback if theres any, it needs user interaction.
     SGE.FullScreen(funcion callback = null)
+
+- ###canvasmanager (Added 16 Dec 2015)
+    Gets the renderer of an canvas element or creates it if it hasn't been provided
+
+    ```javascript
+        //you can create a new canvas element by calling...
+        SGE.CanvasManager.Init(int width, int height);
+        SGE.CanvasManager.Init(250, 250);
+
+        //or you can initializate a context in an existing canvas calling...
+        SGE.CanvasManager.Init(string querySelector);
+        SGE.CanvasManager.Init("#mycanvas");
+    ```
+
+- ###doublebuffer (Added 16 Dec 2015)
+    Creates an double buffering system to the canvas element.
+
+    ```javascript
+    //Define the drawfunctions
+    function square1(){
+        ctx.fillRect(0,0,10,10);
+    }
+    function square2(){
+        ctx.fillRect(20,20,10,10);
+    }
+
+    //Initiate a canvas context
+    SGE.CanvasManager.Init(400,400);
+
+    //Create a buffer with the draw functions (array)    
+    var buffer = SGE.DoubleBuffer([square1, square2]);
+
+    //Bind the buffer to the render where it has to be shown (context)
+    buffer.bindTo(ctx);
+
+    //just swap buffers whenever you need
+    var loop = setInterval(ctx.swapBuffer, 1000/60);
+    ```
+
+- ###structures (Added 16 Dec 2015)
+    Includes some structures.
+
+    - vec2: 2D vectors with x and y coords.
+
+    ```javascript
+        var pos = new SGE.Struct.vec2(10, 41);
+    ```
+
+    - vec3: 3D vectors with x, y and z coords.
+
+    ```javascript
+        var pos = new SGE.Struct.vec3(10,5,13);
+    ```
+
+    vec2 and vec3 includes the operate method, due Javascript doesnt allow overload operators theres an in-built method to 
+    make aritmetical calculations with structures
+
+    ```javascript
+        var a = new SGE.Struct.vec2(10,2);
+        var b = new SGE.Struct.vec2(1,1);
+
+        var c = a.operate("+",b); // {x:11,y:3}
+        var c = a.operate("-",b); // {x:9,y:1}
+        var c = a.operate("*",b); // {x:10,y:2}
+        var c = a.operate("/",b); // {x:10,y:2}
+        a.operate("+=",b); // a = {x:11,y:3}
+        a.operate("-=",b); // a = {x:9,y:1}
+        ...
+    ```
 
 
 #Another piece of code
@@ -161,3 +247,10 @@ function Main(){
 }
 
 ```
+
+
+#Updates
+
+- 16 Dec 2015:
+
+    canvasmanager, structures and doublebuffer modules added, added destructor on scenemanager.

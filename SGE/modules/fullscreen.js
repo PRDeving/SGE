@@ -1,4 +1,4 @@
-var _FullScreen = function(callback){
+SGE.FullScreen = function(callback){
     var el = document.documentElement;
     var rfs = el.requestFullScreen ||
               el.webkitRequestFullScreen ||
@@ -9,6 +9,3 @@ var _FullScreen = function(callback){
         callback();
     }
 };
-
-SGE.FullScreen = _FullScreen;
-delete _FullScreen;

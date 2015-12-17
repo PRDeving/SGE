@@ -1,11 +1,11 @@
 // GAMELOOP
-var _GameLoop = function(){
+SGE.GameLoop = new function(){
     var priorize = [];
     var toExecute = [];
     var loop = null;
 
-    var _Suscribe = function(fn,priorize){
-        if(priorize){
+    var _Suscribe = function(fn,pr){
+        if(pr){
             priorize.push(fn);
         }else{
             toExecute.push(fn);
@@ -14,9 +14,6 @@ var _GameLoop = function(){
 
     var _Run = function(fps){
         loop = setInterval(function(){
-            if(typeof ctx !== 'undefined'){
-                ctx.clearRect(0,0,canvas.width,canvas.height);
-            }
             for(var x = 0; x < priorize.length; x++){
                 priorize[x]();
             }
@@ -43,6 +40,3 @@ var _GameLoop = function(){
     this.Stop = _Stop;
     this.Clear = _Clear;
 };  //GAMELOOP
-
-SGE.GameLoop = new _GameLoop();
-delete _GameLoop;

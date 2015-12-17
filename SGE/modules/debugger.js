@@ -1,4 +1,4 @@
-var _Debugger = function(){
+SGE.Debugger = new function(){
     var $fdebugger;
 
     var _Init = function(){
@@ -34,6 +34,3 @@ var _Debugger = function(){
     _Init();
     this.Log = _Log;
 };
-
-SGE.Debugger = new _Debugger();
-delete _Debugger;

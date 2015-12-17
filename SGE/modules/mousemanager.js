@@ -1,4 +1,4 @@
-var _Mouse = function(){
+SGE.Mouse = new function(){
     var X;
     var Y;
 
@@ -13,6 +13,3 @@ var _Mouse = function(){
 
     this.Position = _position;
 }
-
-SGE.Mouse = new _Mouse();
-delete _Mouse;
