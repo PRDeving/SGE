@@ -55,6 +55,9 @@ var SGE = {};
 
                     console.log("%c Archivo de configuracion config.json cargado", csssuccess);
 
+                    for(var x in Config.dependencies){
+                        SGE.Loader.Add(Config.dependencies);
+                    }
                     for(var x in Config.modules){
                         SGE.Loader.Add(ENGINE_PATH+"modules/" + Config.modules[x] + ".js");
                     }
@@ -76,13 +79,14 @@ var SGE = {};
                     console.log("%c Main app: ", csstitle ,applicationjs);
 
                     SGE.Loader.Add(applicationjs);
-                    SGE.Loader.Run(function(){ 
-                        Init();
-                        SGE.Loader.Run([function(){
+                    SGE.Loader.Run([[function(){ 
+                        var initReturn = (window.Init)? Init() : {};
+                        delete Init;
+                        SGE.Loader.Run([[function(){
                             delete SGE.Loader;
                             console.log("%c Iniciando aplicacion",csstitle)
-                        },Main]);
-                    });
+                        },{}],[Main,initReturn]]);
+                    },{}]]);
                 },
                 error: function(xhr, ajaxOptions, thrownError){
 
@@ -131,7 +135,7 @@ var SGE = {};
             $.ajax({
                 url: m[i],
                 dataType: 'script',
-                cache: false,
+                cache: Config.ModuleCache || false,
                 success: function(){
                     modulesLoaded++;
                     console.log('%c Cargado: ' + this.url,
@@ -196,12 +200,10 @@ var SGE = {};
                         }
                         engineLoad = false;
                         if(callback){
-                            if(typeof callback == "function"){
-                                callback();
-                            }else{
-                                for(var fn in callback){
-                                    callback[fn]();
-                                }
+                            for(var cba in callback){
+                                var cb = callback[cba][0];
+                                var arg = callback[cba][1];
+                                cb(arg);
                             }
                         }
                     }
@@ -209,12 +211,10 @@ var SGE = {};
                 });
             }else{
                 if(callback){
-                    if(typeof callback == "function"){
-                        callback();
-                    }else{
-                        for(var fn in callback){
-                            callback[fn]();
-                        }
+                    for(var cba in callback){
+                        var cb = callback[cba][0];
+                        var arg = callback[cba][1];
+                        cb(arg);
                     }
                 }
             }
@@ -236,8 +236,6 @@ var SGE = {};
 
 
 
-
-
     //// CORE TOOLS
 
     function noDebug(msg){
@@ -248,6 +246,14 @@ var SGE = {};
             oldConsoleLog = console.log;
             window['console']['log'] = function() {};
         }
+    }
+
+    function NewModule(name, fn){
+        if(hasModule(name)) {
+            console.log("SGE already has an module called "+name);
+            return false;
+        } 
+        SGE[name] = fn;
     }
 
     function hasModule(module){
@@ -266,4 +272,5 @@ var SGE = {};
     }
 
     SGE.hasModule = hasModule;
+    SGE.NewModule = NewModule;
 })();

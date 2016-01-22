@@ -11,7 +11,7 @@ SGE injects the dependences needed, the modules you tell it to load and the cust
 SGE needs two files to work, the config.json file that includes all SGE configurations and the application js.
 
 - #config.json
-    config file has all the configurations of SGE, here you can disable the console debugger or add modules or packages to load.
+    config file has all the configurations of SGE, here you can disable the console debugger or add modules, dependencies or packages to load.
 
 - #application.js
     this file can be named as you want to, the path has to be specified in the html `<script>` tag using the attribute "app".
@@ -256,3 +256,9 @@ function Main(){
     canvasmanager, structures and doublebuffer modules added, added destructor on scenemanager.
 
     Changed the way to define modules, fixed the residual trash that it was lefting arround.
+
+- 23 Dec 2015:
+
+    Some changes in the core, now the Init function is optional.
+
+    Now the Init function return will be passed to the Main function as argument, so there's no more global vars
