@@ -217,6 +217,27 @@ SGE has some prebuilt modules that you can activate in the config.json
         ...
     ```
 
+- ###mediamanager (Added 22 Jan 2017)
+    Preload images and media
+
+    - Images.Preload (Object, function)
+
+    Preloads the images from the object and executes the function (callback) when loaded with the new object (media) as argument;
+
+    ```javascript
+      SGE.Images.Preload({
+        test: 'testimage.png',
+        test2: 'testimage2.png',
+      }, function(media) {
+        /* media = {
+            test: ...
+            test2: ...
+          } */
+          ctx.drawImage(media.test, 0, 0);
+          ctx.drawImage(media.test2, 0, 0);
+      });
+    ```
+
 
 #Another piece of code
 Gonna use a custom module, the scenes module and the gameloop module
