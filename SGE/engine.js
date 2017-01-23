@@ -264,6 +264,7 @@ var SGE = {};
             console.log("SGE already has an module called "+name);
             return false;
         } 
+        SGE.Config.modules.push(name);
         SGE[name] = fn;
     }
 
