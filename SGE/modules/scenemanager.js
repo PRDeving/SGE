@@ -33,13 +33,15 @@ SGE.Scene = new function(){
         }
     };
 
-    var _LoadScene = function(name,args){
-        if(current && scenes[current].destructor) scenes[current].destructor(args);
-        current = name;
-        if(hasGameLoop){
-            SGE.GameLoop.Clear();
-        }
-        scenes[name].callback(args);
+    var _LoadScene = function(name){
+      var args = [];
+      for (var i = 1; i < arguments.length; i++) args.push(arguments[i]);
+      if(current && scenes[current].destructor) scenes[current].destructor.apply(this, args);
+      current = name;
+      if(hasGameLoop){
+        SGE.GameLoop.Clear();
+      }
+      scenes[name].callback.apply(this, args);
     };
 
     var _isLoaded = function(){
