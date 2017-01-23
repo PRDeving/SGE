@@ -82,10 +82,21 @@ var SGE = {};
                     SGE.Loader.Run([[function(){ 
                         var initReturn = (window.Init)? Init() : {};
                         delete Init;
-                        SGE.Loader.Run([[function(){
+
+                        function checkScenes() {
+                          return SGE.Scene ? SGE.Scene.isLoaded : true;
+                        }
+                        
+
+                        var loop = setTimeout(function() {
+                          SGE.Loader.Run([[function(){
                             delete SGE.Loader;
                             console.log("%c Iniciando aplicacion",csstitle)
-                        },{}],[Main,initReturn]]);
+                          },{}],[Main,initReturn]]);
+                        }, 100);
+
+                        if (!checkScenes()) loop();
+
                     },{}]]);
                 },
                 error: function(xhr, ajaxOptions, thrownError){

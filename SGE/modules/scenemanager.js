@@ -37,7 +37,7 @@ SGE.Scene = new function(){
         if(current && scenes[current].destructor) scenes[current].destructor(args);
         current = name;
         if(hasGameLoop){
-            GameLoop.Clear();
+            SGE.GameLoop.Clear();
         }
         scenes[name].callback(args);
     };
